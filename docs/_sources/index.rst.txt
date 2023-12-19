@@ -6,15 +6,14 @@
 
 .. toctree::
    :maxdepth: 1
-   :caption: 一.奥比robot_kit简介
+   :caption: 一.奥比robot_kit综述
 
    source/introduction.md
-   source/奥比机器人软件框架.md
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: 二.大脑robot_sdk
+   :caption: 二.大脑 robot_sdk
    :titlesonly:
    :numbered:
 
@@ -44,7 +43,7 @@
 .. 这是二级目录树的使用范例
 .. toctree::
    :maxdepth: 2
-   :caption: 三.小脑robot_control
+   :caption: 三.小脑 robot_control
    :titlesonly:
    :numbered:
 

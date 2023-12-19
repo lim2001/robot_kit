@@ -53,6 +53,7 @@ build_all()
     make html
 	rm -rf docs
 	cp -R _build/html docs
+    cp .nojekyll docs/
     echo "create docs finished"
 }
 clean_all()
