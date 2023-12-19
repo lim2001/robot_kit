@@ -8,8 +8,8 @@
    :maxdepth: 1
    :caption: 一.奥比robot_kit简介
 
-   doc/introduction.md
-   doc/奥比机器人软件框架.md
+   source/introduction.md
+   source/奥比机器人软件框架.md
 
 
 .. toctree::
@@ -18,8 +18,8 @@
    :titlesonly:
    :numbered:
 
-   doc/readme1.md
-   doc/readme2.md
+   source/readme1.md
+   source/readme2.md
 
 
 .. glob可以自动搜索符合的目标，但不适合顺序编号
@@ -48,8 +48,8 @@
    :titlesonly:
    :numbered:
 
-   doc/readme3.md
-   doc/readme4.md
+   source/readme3.md
+   source/readme4.md
 
 .. toctree::
    :maxdepth: 2
@@ -57,8 +57,8 @@
    :titlesonly:
    :numbered:
 
-   doc/readme5.md
-   doc/readme6.md
+   source/readme5.md
+   source/readme6.md
 
 .. toctree::
    :maxdepth: 1
@@ -66,27 +66,27 @@
    :titlesonly:
    :numbered:
 
-   doc/readme11.md
-   doc/readme22.md
+   source/readme11.md
+   source/readme22.md
 
 .. toctree::
    :maxdepth: 1
    :caption: 六.开发板套件
 
-   doc/dev_platform.md
+   source/dev_platform.md
 
 
 .. toctree::
    :maxdepth: 1
    :caption: 七.技术支持
 
-   doc/support.md
+   source/support.md
 
 .. toctree::
    :maxdepth: 2
    :caption: 八.常见问题
 
-   doc/question_and_answer.md
+   source/question_and_answer.md
 
 .. toctree::
    :maxdepth: 1

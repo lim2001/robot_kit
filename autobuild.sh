@@ -49,11 +49,17 @@ echo_autobuild_start()
 build_all()
 {
     echo "make clean && make html"
-    make clean && make html
+    make clean
+    make html
 	rm -rf docs
 	cp -R _build/html docs
+    echo "create docs finished"
 }
-
+clean_all()
+{
+    echo "clean all"
+    make clean
+}
 ##################################################################
 datetime=$(date +%Y%m%d_%H%M)
 echo_autobuild_start;
@@ -80,10 +86,8 @@ if [ "$1" == "all" ] || [ "$1" == "ALL" ];then
     build_all;
     exit 0
 elif [ "$1" == "clean" ];then
-    echo "clean all"
-    make clean
+    clean_all
     exit 0
-
 elif [ "$1" == "send" ];then
 
     exit 0

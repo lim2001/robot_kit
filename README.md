@@ -4,22 +4,25 @@
 
 1、文档格式 markdown
 
-2、Sphinx 文档转换工具
+2、文档转换工具 Sphinx
 
-3、gitbub 托管
+3、托管 gitbub
 
 
-本项目的github地址 ：https://github.com/orbbec/OrbbecSDK_ROS2
+本应用文档阅读链接 ：《 [奥比中光] robot_kit 应用文档  》 https://lim2001.github.io/robot_kit/index.html
 
-点击右侧链接可在线阅读本项目文档 ：《 [奥比中光]robot_kit应用文档.用户手册  》
+
+本项目的github地址 ：https://github.com/orbbec/robot_kit
 
 
 <br>
 
-
 # 文档编写规范
 
-2、框图、软件框架建议同学们原则上采用processon工具绘图，目的是为了保持风格统一（特殊图除外）
+1、框图、软件框架建议原则上采用processon工具、visio绘图，目的是为了保持风格统一（特殊图除外）
+
+2、采用标准markdown
+
 
 # 定制化部分
 
@@ -42,4 +45,4 @@ graph LR
 5. 重新生成html，查看效果
 
 - 执行 `make html 或 ./autobuild`
-- 打开build/html/index.html查看效果
+- 打开_build/html/index.html查看效果
