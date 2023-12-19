@@ -6,7 +6,7 @@
 
 2、文档转换工具 Sphinx
 
-3、托管 gitbub
+3、托管 github
 
 
 本应用文档阅读链接 ：《 [奥比中光] robot_kit 应用文档  》 https://lim2001.github.io/robot_kit/index.html
