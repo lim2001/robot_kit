@@ -37,8 +37,7 @@ USER_SHELL=server
 
 
 ##################################################################
-#source env
-
+#function
 
 echo_autobuild_start()
 {
@@ -46,6 +45,14 @@ echo_autobuild_start()
     echo -e "\e[32m***********  ./autobuild.sh  $1 **************\e[0m"
 }
 
+
+build_all()
+{
+    echo "make clean && make html"
+    make clean && make html
+	rm -rf docs
+	cp -R _build/html docs
+}
 
 ##################################################################
 datetime=$(date +%Y%m%d_%H%M)
@@ -56,8 +63,7 @@ echo_autobuild_start;
 
 ##################################################################
 if [ "$#" -eq "0" ];then
-    echo "make clean && make html ."
-    make clean && make html
+    build_all;
 	exit 0
 elif [ "$#" -eq "1" ];then
 echo "."
@@ -71,8 +77,7 @@ else
 fi
 
 if [ "$1" == "all" ] || [ "$1" == "ALL" ];then
-    echo "make clean && make html"
-    make clean && make html
+    build_all;
     exit 0
 elif [ "$1" == "clean" ];then
     echo "clean all"
