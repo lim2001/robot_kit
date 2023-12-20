@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2. 2、gazebo &mdash; [奥比中光] robot_kit 应用文档  文档</title>
+  <title>2. gazebo &mdash; [奥比中光] robot_kit 应用文档  文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -57,28 +57,40 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme1.html">1. 大脑–应用业务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme2.html">2. 大脑软件框架</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">3. 功能开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html#slam">4. SLAM建图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html#nav2">5. NAV2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html#id2">6. 人体跟随</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html#id3">7. 手势跟随控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html#id4">8. 语音控制交互</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">三.小脑 robot_control</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme3.html">1. 小脑—运动控制端</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme4.html">2. 小脑软件框架</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">四.开发环境搭建&amp;编译</span></p>
+<p class="caption" role="heading"><span class="caption-text">四.Apps应用实例&amp;功能开发</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app.html">1. Apps 应用实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app.html#id1">2. 机器人形态支持</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app.html#service-robot">3. 家庭服务机器人 service robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app.html#quadruped-robot">4. 四足仿生机器人 quadruped robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app.html#patrol-robot">5. 巡逻机器人 patrol robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app.html#mechanical-arm">6. 机械臂 mechanical arm</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">五.开发环境搭建&amp;编译</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme5.html">1. docker环境</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme6.html">2. apt-install安装库</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">五.demo运行与仿真</span></p>
+<p class="caption" role="heading"><span class="caption-text">六.demo运行与仿真</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme11.html">1. 奥比云仿真平台</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 2、gazebo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. gazebo</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">六.开发板套件</span></p>
+<p class="caption" role="heading"><span class="caption-text">七.开发板套件&amp;技术支持</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dev_platform.html">开发板套装&amp;购买链接</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">七.技术支持</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="support.html">开发者社区技术支持</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">八.常见问题</span></p>
@@ -104,7 +116,7 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2. </span>2、gazebo</li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>gazebo</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/source/readme22.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -115,7 +127,7 @@
            <div itemprop="articleBody">
              
   <section id="gazebo">
-<h1><span class="section-number">2. </span>2、gazebo<a class="headerlink" href="#gazebo" title="此标题的永久链接"></a></h1>
+<h1><span class="section-number">2. </span>gazebo<a class="headerlink" href="#gazebo" title="此标题的永久链接"></a></h1>
 <section id="id1">
 <h2><span class="section-number">2.1. </span>2.1、gazebo仿真<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h2>
 <p><img alt="1702953948915" src="../_images/1702953948915.png" /></p>

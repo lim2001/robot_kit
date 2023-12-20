@@ -55,28 +55,40 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/readme1.html">1. 大脑–应用业务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/readme2.html">2. 大脑软件框架</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/development.html">3. 功能开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/development.html#slam">4. SLAM建图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/development.html#nav2">5. NAV2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/development.html#id2">6. 人体跟随</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/development.html#id3">7. 手势跟随控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/development.html#id4">8. 语音控制交互</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">三.小脑 robot_control</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/readme3.html">1. 小脑—运动控制端</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/readme4.html">2. 小脑软件框架</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">四.开发环境搭建&amp;编译</span></p>
+<p class="caption" role="heading"><span class="caption-text">四.Apps应用实例&amp;功能开发</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/app.html">1. Apps 应用实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/app.html#id1">2. 机器人形态支持</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/app.html#service-robot">3. 家庭服务机器人 service robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/app.html#quadruped-robot">4. 四足仿生机器人 quadruped robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/app.html#patrol-robot">5. 巡逻机器人 patrol robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/app.html#mechanical-arm">6. 机械臂 mechanical arm</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">五.开发环境搭建&amp;编译</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/readme5.html">1. docker环境</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/readme6.html">2. apt-install安装库</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">五.demo运行与仿真</span></p>
+<p class="caption" role="heading"><span class="caption-text">六.demo运行与仿真</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/readme11.html">1. 奥比云仿真平台</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/readme22.html">2. 2、gazebo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/readme22.html">2. gazebo</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">六.开发板套件</span></p>
+<p class="caption" role="heading"><span class="caption-text">七.开发板套件&amp;技术支持</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/dev_platform.html">开发板套装&amp;购买链接</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">七.技术支持</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="source/support.html">开发者社区技术支持</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">八.常见问题</span></p>
@@ -118,14 +130,16 @@
 <p>1、文档格式 markdown</p>
 <p>2、文档转换工具 Sphinx</p>
 <p>3、托管 github</p>
-<p>本应用文档阅读链接 ：《 [奥比中光] robot_kit 应用文档  》 https://lim2001.github.io/robot_kit/index.html</p>
-<p>本项目的github地址 ：https://github.com/orbbec/robot_kit</p>
+<br><p>本应用文档阅读链接 ：《 [奥比中光] robot_kit 应用文档  》</p>
+<p>https://lim2001.github.io/robot_kit/index.html</p>
+<p>本文档的源码地址 ：https://github.com/lim2001/robot_kit</p>
+<p>robot_kit SDK 开源代码地址： https://github.com/xxxxxx待定</p>
 <br></section>
 <section id="id1">
 <h1>文档编写规范<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
-<p>1、框图、软件框架建议原则上采用processon工具、visio绘图，目的是为了保持风格统一（特殊图除外）</p>
+<p>1、框图、软件框架建议原则上采用processon、visio工具绘图，目的是为了保持风格统一（特殊图除外）</p>
 <p>2、采用标准markdown</p>
-</section>
+<br></section>
 <section id="id2">
 <h1>定制化部分<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h1>
 <p>说明：定制化的配置都在<strong>doc/conf.py</strong>中设置。因为有一些额外需求，因此需要定制化。</p>
@@ -149,8 +163,8 @@ graph LR
 <li><p>重新生成html，查看效果</p></li>
 </ol>
 <ul class="simple">
-<li><p>执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span> <span class="pre">或</span> <span class="pre">./autobuild</span></code></p></li>
-<li><p>打开_build/html/index.html查看效果</p></li>
+<li><p>执行 <code class="docutils literal notranslate"><span class="pre">./autobuild</span> </code> 编译，或make html</p></li>
+<li><p>打开docs/index.html查看效果</p></li>
 </ul>
 </section>
 

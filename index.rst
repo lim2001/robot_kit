@@ -19,7 +19,7 @@
 
    source/readme1.md
    source/readme2.md
-
+   source/development.md
 
 .. glob可以自动搜索符合的目标，但不适合顺序编号
 .. 对顺序无要求的目录可以使用这种方式
@@ -52,7 +52,16 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: 四.开发环境搭建&编译
+   :caption: 四.Apps应用实例&功能开发
+   :titlesonly:
+   :numbered:
+
+   source/app.md
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 五.开发环境搭建&编译
    :titlesonly:
    :numbered:
 
@@ -61,7 +70,7 @@
 
 .. toctree::
    :maxdepth: 1
-   :caption: 五.demo运行与仿真
+   :caption: 六.demo运行与仿真
    :titlesonly:
    :numbered:
 
@@ -70,15 +79,9 @@
 
 .. toctree::
    :maxdepth: 1
-   :caption: 六.开发板套件
+   :caption: 七.开发板套件&技术支持
 
    source/dev_platform.md
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: 七.技术支持
-
    source/support.md
 
 .. toctree::
