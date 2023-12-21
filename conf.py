@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = '[奥比中光] robot_kit 应用文档'
+project = '[奥比中光] RobotKit 应用文档'
 copyright = '2023, ORBBEC INC. www.orbbec.com.cn'
 author = 'ORBBEC INC. www.orbbec.com.cn'
 
