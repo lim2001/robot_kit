@@ -1,14 +1,14 @@
 .. 这一页是模块目录树
 
-Trubo AI
+Turbo AI
 ======================================================
 
 .. toctree::
     :maxdepth: 3
-    :caption: TurboAI
+    :caption: Turbo AI:
     :titlesonly:
 
-    source/syncdoc/robot_sdk/turboai/README.md
-    source/syncdoc/robot_sdk/turboai/turboairt/README.md
+    source/turboai/README.md
+    source/turboai/turboairt/README.md
 
 
