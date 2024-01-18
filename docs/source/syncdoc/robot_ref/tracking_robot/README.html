@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Tracking robot 跟随机器人 &mdash; [奥比中光] RobotKit 应用文档  文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=7d86a446"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" />
+    <link rel="next" title="1. Robot SDK概述" href="../../../robot_sdk.html" />
+    <link rel="prev" title="1. 概述" href="../../../introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            [奥比中光] RobotKit 应用文档
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">一.RobotKit概述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">1. 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#id2">2. 功能介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#robotkit"><strong>3. RobotKit核心模块</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#id3">4. RobotKit框图</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">二.RobotRef参考设计实例</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Tracking robot 跟随机器人</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">三.RobotSDK功能介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_sdk.html">1. Robot SDK概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_sdk_app.html">2. APP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_sdk_alg.html">3. ALG算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_sdk_sensor.html">4. Sensor 传感器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_sdk_turbo_ai.html">5. Trubo AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_sdk_common.html">6. Common 通用组件</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">四.RobotActuator功能介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_actuator.html">1. RobotActuator运动控制系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_actuator_alg.html">2. RobotActuator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">五.环境搭建与部署</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_env.html">1. docker环境</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">六.RobotKit开发套件</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_platform.html">1. 开发板套装&amp;购买链接</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">七.技术支持与FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../support.html">开发者社区技术支持</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../question_and_answer.html">Q&amp;A</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">八.版权</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSE.html">版权说明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">[奥比中光] RobotKit 应用文档</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>Tracking robot 跟随机器人</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/source/syncdoc/robot_ref/tracking_robot/README.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tracking-robot">
+<h1><span class="section-number">1. </span>Tracking robot 跟随机器人<a class="headerlink" href="#tracking-robot" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2><span class="section-number">1.1. </span>功能说明：<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>通过视觉进行人脸目标检测与跟踪，并生成运动控制指令控制机器人自动跟随目标运动。该功能支持机器人实物和Gazebo仿真两种体验方式。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">1.2. </span>机器人实物：<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th style="text-align: left;">设备名称</th>
+<th>生产厂家</th>
+<th>作用</th>
+<th>参考链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Orbbec Gemini2vl相机</td>
+<td>奥比中光</td>
+<td>3D结构光深度视觉相机，点云数据输入源</td>
+<td>https://item.jd.com/10085187988079.html</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></section>
+<section id="id3">
+<h2><span class="section-number">1.3. </span>应用说明：<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>运行本应用示例，可以通过摄像头识别到人脸，从而控制小车运动轨迹，通过foxglove可以查看摄像头识别人脸框的情况，通过gazebo可以模拟演示人脸移动控制小车运动情况</p>
+<p>原理框图</p>
+<p><img alt="image/app.png" src="../../../../_images/app.png" /></p>
+<section id="id4">
+<h3><span class="section-number">1.3.1. </span>功能包安装<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>1、安装gazebo</p>
+<p>2、安装foxglove</p>
+<p>或直接采用奥比附带提供的docker环境</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">1.3.2. </span>编译<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>在kit目录下全编译 colcon build   （包含ref、sdk包）</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">1.3.3. </span>运行<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>1、确保设备连接上gemini摄像头</p>
+<p>2、source install/setup.bash  (若设备执行器是zsh，则使用source install/setup.zsh)</p>
+<p>3、ros2 launch tracking bringup_launch.py</p>
+<br><p>此时launch启动应用，并自动打开gazebo，加载两轮差速小车模型（设备需要安装好gazebo和小车模型）</p>
+<br><p>控制方法：识别到人脸，根据人脸的移动方向控制机器人底盘做前进后退转弯运动（在gazebo画面中仿真）：</p>
+<p>人脸向上移动—–小车前进</p>
+<p>人脸向下移动—–小车后退</p>
+<p>人脸向左移动—–小车左转弯</p>
+<p>人脸向右移动—–小车右转弯</p>
+<br><p>原理，tracking实现判断人脸移动方向趋势，通过发布发布话题/cmd_vel，以控制底盘移动</p>
+<br></section>
+<section id="id7">
+<h3><span class="section-number">1.3.4. </span>仿真<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>通过foxglove可以查看摄像头识别人脸框的情况，通过gazebo可以模拟演示人脸移动控制小车运动情况</p>
+<br></section>
+</section>
+<section id="id8">
+<h2><span class="section-number">1.4. </span>详细代码开发说明：<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>参考章节：</p>
+<p>人体人脸跟随应用示例app说明：<a class="reference internal" href="#"><span class="doc">robot_ref/tracking_robot</span></a></p>
+<p>人体人脸识别算法说明：<a class="reference internal" href="../../robot_sdk/alg/body_tracking_alg/README.html"><span class="doc">alg/body_tracking_alg</span></a></p>
+<p>Gemini2vl摄像头sdk说明：<a class="reference internal" href="../../robot_sdk/sensor/camera/src/gemini2vl/README.html"><span class="doc">sensor/camera/src/gemini2vl</span></a></p>
+</section>
+<section id="id9">
+<h2><span class="section-number">1.5. </span>常见问题：<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>1、人脸识别跟随，使用gazebo仿真和真实机器人仿真存在差异，区别是真实机器人摄像头可以跟随着人脸转动对焦中心坐标</p>
+<p>2、通过foxglove可以查看摄像头识别人脸框的情况，通过gazebo可以模拟演示人脸移动控制小车运动情况。</p>
+<p>3、若重新打开camera遇到异常，为上一次异常退出导致，这时尝试拔下camera usb重新上电重启</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="../../../introduction.html" class="btn btn-neutral float-left" title="1. 概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../../../robot_sdk.html" class="btn btn-neutral float-right" title="1. Robot SDK概述" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, ORBBEC INC. www.orbbec.com.cn.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

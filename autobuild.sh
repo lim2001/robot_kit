@@ -1,6 +1,6 @@
- #!/usr/bin/env bash
+#!/bin/bash
 
-set -e
+#set -e
 
 
 
@@ -70,7 +70,7 @@ echo_autobuild_start;
 
 ##################################################################
 if [ "$#" -eq "0" ];then
-    build_all;
+    build_all
 	exit 0
 elif [ "$#" -eq "1" ];then
 echo "."
@@ -78,19 +78,34 @@ elif [ "$#" -eq "2" ];then
 echo ".."
 elif [ "$#" -eq "3" ];then
 echo "..."
-else
-	help_menu;
-	exit 0
 fi
 
-if [ "$1" == "all" ] || [ "$1" == "ALL" ];then
-    build_all;
+if [ "$1" == "all" ];then
+    build_all
     exit 0
 elif [ "$1" == "clean" ];then
     clean_all
     exit 0
-elif [ "$1" == "send" ];then
+elif [ "$1" == "syncdoc" ];then
+    echo "copy ../robot_sdk/ ../robot_ref/ ../robot_actuator file to robot_doc/source/syncdoc/"
+    echo "------------------------------------------------"
+    readme_files=$(find ../robot_sdk/ ../robot_ref/ ../robot_actuator/ -name 'README.md')
+    for file in $readme_files; do
+        dir=$(dirname "$file")
 
+        new_dir=$(echo "$dir" | cut -d'/' -f2-)
+        #echo "copy $file to source/syncdoc/$new_dir/README.md"
+        echo "source/syncdoc/$new_dir/README.md"
+        mkdir -p "source/syncdoc/$new_dir"
+        cp -r "$file" "source/syncdoc/$new_dir/"
+
+        if [ -d "$dir/image" ]; then
+            mkdir -p "source/syncdoc/$new_dir/image"
+            echo "copy $dir/image to source/syncdoc/$new_dir/image"
+            cp -r "$dir/image" "source/syncdoc/$new_dir"
+        fi
+
+    done
     exit 0
 elif [ "$1" == "run" ] ;then
     echo "open html"

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6.2. FlameGraph火焰图 &mdash; [奥比中光] RobotKit 应用文档  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=7d86a446"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="1. RobotActuator运动控制系统" href="robot_actuator.html" />
+    <link rel="prev" title="6.1. Foxglove可视化分析" href="common_tools_foxglove.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            [奥比中光] RobotKit 应用文档
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">一.RobotKit概述</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#id2">2. 功能介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#robotkit"><strong>3. RobotKit核心模块</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#id3">4. RobotKit框图</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">二.RobotRef参考设计实例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syncdoc/robot_ref/tracking_robot/README.html">1. Tracking robot 跟随机器人</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">三.RobotSDK功能介绍</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="robot_sdk.html">1. Robot SDK概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_app.html">2. APP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_alg.html">3. ALG算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_sensor.html">4. Sensor 传感器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_turbo_ai.html">5. Trubo AI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../robot_sdk_common.html">6. Common 通用组件</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="common_tools_foxglove.html">6.1. Foxglove可视化分析</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. FlameGraph火焰图</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">6.2.1. 概述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">6.2.2. 准备工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">6.2.3. 使用介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">6.2.4. 结果分析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">四.RobotActuator功能介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="robot_actuator.html">1. RobotActuator运动控制系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_actuator_alg.html">2. RobotActuator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">五.环境搭建与部署</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="robot_env.html">1. docker环境</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">六.RobotKit开发套件</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev_platform.html">1. 开发板套装&amp;购买链接</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">七.技术支持与FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">开发者社区技术支持</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question_and_answer.html">Q&amp;A</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">八.版权</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSE.html">版权说明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">[奥比中光] RobotKit 应用文档</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../robot_sdk_common.html"><span class="section-number">6. </span>Common 通用组件</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6.2. </span>FlameGraph火焰图</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/common_tools_flame_graph.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="flamegraph">
+<h1><span class="section-number">6.2. </span>FlameGraph火焰图<a class="headerlink" href="#flamegraph" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2><span class="section-number">6.2.1. </span>概述<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>火焰图是用图形化的方式来展现perf等工具采集的性能数据，对数据进行统计和分析，方便找出性能热点。</p>
+<p><img alt="image/flameGraph.png" src="../_images/flameGraph.png" /></p>
+<p>火焰图有以下特征（这里以 on-cpu 火焰图为例）：</p>
+<ul class="simple">
+<li><p>每一列代表一个调用栈，每一个格子代表一个函数</p></li>
+<li><p>纵轴展示了栈的深度，按照调用关系从下到上排列。最顶上格子代表采样时，正在占用 cpu 的函数。</p></li>
+<li><p>横轴的意义是指：火焰图将采集的多个调用栈信息，通过按字母横向排序的方式将众多信息聚合在一起。需要注意的是它并不代表时间。</p></li>
+<li><p>横轴格子的宽度代表其在采样中出现频率，所以一个格子的宽度越大，说明它是瓶颈原因的可能性就越大。</p></li>
+<li><p>火焰图格子的颜色是随机的暖色调，方便区分各个调用信息。</p></li>
+<li><p>其他的采样方式也可以使用火焰图， on-cpu 火焰图横轴是指 cpu 占用时间，off-cpu 火焰图横轴则代表阻塞时间。</p></li>
+<li><p>采样可以是单线程、多线程、多进程甚至是多 host</p></li>
+</ul>
+<p>代码仓库：<a class="reference external" href="https://github.com/brendangregg/FlameGraph.git">https://github.com/brendangregg/FlameGraph.git</a></p>
+</section>
+<section id="id2">
+<h2><span class="section-number">6.2.2. </span>准备工作<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ol class="simple">
+<li><p>flamegraph工具分为两个部分，第一部分是可执行程序perf。perf是一款进行软件性能分析的工具，用于统计并输出系统或某一进程内的函数调用情况。perf工具地平线RDK的操作系统已经自带了，所以直接使用即可。</p></li>
+<li><p>flamegraph工具的第二部分是解析perf文本的脚本，脚本用于解析perf统计的文本数据，生成SVG格式的函数调用火焰图，方便观察和分析。</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2><span class="section-number">6.2.3. </span>使用介绍<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ol class="simple">
+<li><p>使用perf record工具采样地平线RDK系统内的函数调用情况，生成perf.data文件</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="c1"># perf record -F 99 -a -g -- sleep 60</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>使用perf script 解析perf.data文件生成out.perf</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@ubuntu</span><span class="p">:</span><span class="o">~</span><span class="c1"># perf script &gt; out.perf</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>在PC或者上 git clone https://github.com/brendangregg/FlameGraph.git，进入flamegraph目录，使用flamegraph工具包内的stackcollapse-perf.pl 对out.perf 反折叠生成out.folded</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">stackcollapse</span><span class="o">-</span><span class="n">perf</span><span class="o">.</span><span class="n">pl</span> <span class="n">out</span><span class="o">.</span><span class="n">perf</span> <span class="o">&gt;</span> <span class="n">out</span><span class="o">.</span><span class="n">folded</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>使用flamegraph.pl 生成svg火焰图</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">flamegraph</span><span class="o">.</span><span class="n">pl</span> <span class="n">out</span><span class="o">.</span><span class="n">folded</span> <span class="o">&gt;</span> <span class="n">flame</span><span class="o">.</span><span class="n">svg</span>
+</pre></div>
+</div>
+<p>其中1，2步骤在设备上完成，3，4步骤在PC或者设备上完成。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">6.2.4. </span>结果分析<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>经过前一节的使用流程，记录下来的系统内的函数调用如下图所示</p>
+<p><img alt="https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/2M9qPBoe56Kml015/img/71a92acc-f8f7-43b0-b69a-57326983a8f1.png" src="https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/2M9qPBoe56Kml015/img/71a92acc-f8f7-43b0-b69a-57326983a8f1.png" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="common_tools_foxglove.html" class="btn btn-neutral float-left" title="6.1. Foxglove可视化分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="robot_actuator.html" class="btn btn-neutral float-right" title="1. RobotActuator运动控制系统" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, ORBBEC INC. www.orbbec.com.cn.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

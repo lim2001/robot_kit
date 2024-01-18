@@ -1,6 +1,5 @@
 # 开发板套装&购买链接
 
+开源代码下载链接：github
 
-软件sdk下载链接：github
-
-开发板购买链接：www.orbbec.com.cn
+Gemini2vl相机 [点击购买链接](https://item.jd.com/100063076495.html)

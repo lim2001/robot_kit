@@ -1,0 +1,637 @@
+# Foxglove可视化分析
+
+
+## 概述
+
+ Foxglove是一种用于ROS的可视化工具，起源于前Cruise员工基于Webviz创建的一个分支，旨在帮助开发人员更直观的理解和调试他们的ROS系统。它提供了一个更直观的用户界面，用于可视化ROS话题、消息和节点间的交互。用户可以查看实时数据流，调试ROS节点和消息传递，并监视ROS系统的状态。
+
+Foxglove还提供了一系列实用工具，如消息记录和回放功能，以及对ROS图像和其他数据类型的支持。它的用户界面设计简洁直观，便于开发人员快速上手和高效的进行ROS系统的开发和调试工作。
+相比较Webviz，它的功能更完善，关于它们之间的对比可参考：[Foxglove和Webviz对比](https://alidocs.dingtalk.com/i/nodes/MNDoBb60VLrOBZkkFQqw0aYm8lemrZQ3?doc_type=wiki_doc#)[]()
+
+[]()
+
+## [安装和设置Foxglove]()
+
+[Foxglove提供Web版和桌面app版(支持Linux、Windows、macOS)。]()
+
+[官网：]()[https://foxglove.dev/](https://foxglove.dev/)
+
+github地址：[https://github.com/foxglove/studio](https://github.com/foxglove/studio)
+
+Web访问地址:[https://studio.foxglove.dev/view?layoutId=30e02236-0d8d-40f0-a447-1975220cda91](https://studio.foxglove.dev/view?layoutId=30e02236-0d8d-40f0-a447-1975220cda91)
+
+app版本下载地址:[https://foxglove.dev/download](https://foxglove.dev/download)
+
+Foxglove的桌面版功能更完善，部分功能只能在桌面版使用，如：
+
+1.连接到数据
+
+1.开启一个本地ROS1连接
+
+2.连接到Velodyne雷达硬件
+
+3.用package://为前缀的URL来加载本地URDF文件和mesh资源
+2.关于扩展方面
+
+ 1.通过marketplace安装扩展
+
+ 2.本地安装扩展(参考第四部分)
+3.其他
+
+  创建以foxgolve://为前缀的可共享链接
+## 连接到ROS堆栈
+
+### 连接数据源
+
+打开foxglove，显示如下图：![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/d4c9b788-7d6e-494d-9d24-514d5dbbbacc.png)
+
+有三种数据源
+
+
+| 数据源类型     | 功能                             | 支持的格式                                                                                                                                                                                                                 |
+| ---------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 本地文件       | 检索本地的数据                   | ROS1(.bag)MCAP(.mcap)PX4 ULog(.ugl)                                                                                                                                                                                        |
+| 上传和共享数据 | 检索导入到Foxglove平台的数据     | ROS1MCAP                                                                                                                                                                                                                   |
+| 打开连接       | 检索实时机器人堆栈或者远程的数据 | ROS1ROS2(1.可连接实时机器人；2.远程或本地的.db3数据需要通过mcap的 cli工具转成.mcap才能打开)Custom(1.通过Foxglove websocket实时传输自定义数据如:ProtoBuf、JSON、FlatBuffers；2.将本地或远程数据编码成.mcap播放)MCAPVelodyne |
+
+MCAP是一种用于多模态日志的开源容器文件格式，它支持多个带时间戳的预序列化数据通道，适用于发布/订阅机器人应用程序。
+
+打开连接有以下几种类型可选：
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/b74df239-ca84-43b0-a848-29b2e02b017d.png)
+
+
+| 连接类型           | 主要功能                                                                            | 注           |
+| -------------------- | ------------------------------------------------------------------------------------- | -------------- |
+| Foxglove WebSocket | 在Foxglove和机器人之间只需要打开一个端口即可，运行一个额外的ROS节点foxglove_bridge  | 默认8765端口 |
+| Rosbridge          | 在Foxglove和机器人之间只需要打开一个端口即可，运行一个额外的ROS节点rosbridge_server | 默认9090端口 |
+| ROS1               | 连接 ROS1机器人                                                                     |              |
+| Velodyne Lidar     | 连接雷达硬件设备                                                                    |              |
+| Remote file        | 远程文件                                                                            |              |
+| ROS2               | 不支持，推荐直接使用Foxglove WebSocket.                                             |              |
+
+foxglove_bridge使用Foxglove WebSocket协议，这是一种类似于rosbridge的协议，但能够支持额外的模式格式，如：ROS2 .msg，ROS2.idl，参数，以及非ROS系统，这个桥接器是用C++编写的，旨在实现高性能和低开销，以最小化对机器人堆栈的影响。
+
+安装：
+
+支持ROS1 Melodic和Noetic，以及ROS2的Humble，Rolling，(Galactic以上都支持)，早期版本可能由于API设计或者性能限制不支持。
+
+```
+sudo apt install ros-$ROS_DISTRO-foxglove-bridge
+```
+运行：
+
+```
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+```
+rosbridge_server是用于ROS的工具，充当了ROS系统和其他系统之间的桥梁。它允许使用WebSocket协议的方式连接到ROS系统，从而可以通过网络传输ROS系统的消息和服务，使得非ROS系统和ROS系统之间可以实时通信，包括订阅和发布ROS主题，调用ROS服务，获取ROS参数等操作。
+
+安装：
+
+```
+ sudo apt install ros-<ROS_DISTRO>-rosbridge-server
+```
+运行：
+
+```
+ros2 launch rosbridge_server rosbridge_websocket.launch
+```
+### 面板类型
+
+面板是模块化可视化界面，可以配置成Foxglove布局，Foxglove提供了很多预定的面板供开发者快速使用，有以下类型。
+
+#### 3D面板
+
+在三维场景中显示标记、相机图像、网格、URDF和其他内容。
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/c9a44dac-5e52-44ea-aaaa-7fdb249f5cd8.png)
+
+##### 支持的消息
+
+ 3D面板可以可视化各种不同的消息，要可视化主题，消息类型必须符合以下消息之一。
+1.相机视野
+
+  场景相机的标定参数
+
+| 框架   | 样式                                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| ROS1   | [sensor_msgs/CameraInfo](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/CameraInfo.html)                  |
+| ROS2   | [sensor_msgs/msg/CameraInfo](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/CameraInfo.msg) |
+| Custom | [foxglove.CameraCalibration](https://docs.foxglove.dev/docs/visualization/message-schemas/camera-calibration)      |
+
+2.网格
+
+
+| 框架   | 样式                                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| ROS1   | [nav_msgs/OccupancyGrid](https://docs.ros.org/en/noetic/api/nav_msgs/html/msg/OccupancyGrid.html)                  |
+| ROS2   | [nav_msgs/msg/OccupancyGrid](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/OccupancyGrid.msg) |
+| Custom | [foxglove.Grid](https://docs.foxglove.dev/docs/visualization/message-schemas/grid)                                 |
+
+3. 图像
+
+使用相应的相机视野消息在3D场景中显示图像
+
+
+| 框架   | 样式                                                                                                                         |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ROS1   | [sensor_msgs/Image](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html)                                      |
+| ROS1   | [sensor_msgs/CompressedImage](https://docs.ros.org/en/api/sensor_msgs/html/msg/CompressedImage.html)                         |
+| ROS2   | [sensor_msgs/msg/Image](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/Image.msg)                     |
+| ROS2   | [sensor_msgs/msg/CompressedImage](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/CompressedImage.msg) |
+| Custom | [foxglove.RawImage](https://docs.foxglove.dev/docs/visualization/message-schemas/raw-image)                                  |
+| Custom | [foxglove.CompressedImage](https://docs.foxglove.dev/docs/visualization/message-schemas/compressed-image)                    |
+
+4.激光扫描仪
+
+
+| 框架   | 样式                                                                                                             |
+| -------- | ------------------------------------------------------------------------------------------------------------------ |
+| ROS1   | [sensor_msgs/LaserScan](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/LaserScan.html)                  |
+| ROS2   | [sensor_msgs/msg/LaserScan](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/LaserScan.msg) |
+| Custom | [foxglove.LaserScan](https://docs.foxglove.dev/docs/visualization/message-schemas/laser-scan)                    |
+
+5.ROS多边形
+
+
+| 框架 | 样式                                                                                                                           |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| ROS1 | [geometry_msgs/PolygonStamped](https://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PolygonStamped.html)                  |
+| ROS2 | [geometry_msgs/msg/PolygonStamped](https://github.com/ros2/common_interfaces/blob/master/geometry_msgs/msg/PolygonStamped.msg) |
+
+6.ROS 标记
+
+与场景实体类似，这些标记消息描述原始形状或者网格。
+
+
+| 框架 | 样式                                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| ROS1 | [visualization_msgs/Marker](https://docs.ros.org/en/noetic/api/visualization_msgs/html/msg/Marker.html)                            |
+| ROS1 | [visualization_msgs/MarkerArray](https://docs.ros.org/en/noetic/api/visualization_msgs/html/msg/MarkerArray.html)                  |
+| ROS2 | [visualization_msgs/msg/Marker](https://github.com/ros2/common_interfaces/blob/master/visualization_msgs/msg/Marker.msg)           |
+| ROS2 | [visualization_msgs/msg/MarkerArray](https://github.com/ros2/common_interfaces/blob/master/visualization_msgs/msg/MarkerArray.msg) |
+
+7.路径
+
+
+| 框架   | 样式                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------ |
+| ROS1   | [nav_msgs/Path](https://docs.ros.org/en/noetic/api/nav_msgs/html/msg/Path.html)                      |
+| ROS2   | [nav_msgs/msg/Path](https://github.com/ros2/common_interfaces/blob/master/nav_msgs/msg/Path.msg)     |
+| Custom | [foxglove.PosesInFrame](https://docs.foxglove.dev/docs/visualization/message-schemas/poses-in-frame) |
+
+8.点云
+
+
+| 框架   | 样式                                                                                                                 |
+| -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| ROS1   | [sensor_msgs/PointCloud2](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/PointCloud2.html)                  |
+| ROS2   | [sensor_msgs/msg/PointCloud2](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/PointCloud2.msg) |
+| Custom | [foxglove.PointCloud](https://docs.foxglove.dev/docs/visualization/message-schemas/point-cloud)                      |
+
+9.姿势
+
+
+| 框架   | 样式                                                                                                                     |
+| -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| ROS1   | [geometry_msgs/PoseArray](https://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PoseArray.html)                      |
+| ROS1   | [geometry_msgs/PoseStamped](https://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PoseStamped.html)                  |
+| ROS2   | [geometry_msgs/msg/PoseArray](https://github.com/ros2/common_interfaces/blob/master/geometry_msgs/msg/PoseArray.msg)     |
+| ROS2   | [geometry_msgs/msg/PoseStamped](https://github.com/ros2/common_interfaces/blob/master/geometry_msgs/msg/PoseStamped.msg) |
+| Custom | [foxglove.PosesInFrame](https://docs.foxglove.dev/docs/visualization/message-schemas/poses-in-frame)                     |
+
+10.场景实体
+
+
+| 框架   | 样式                                                                                              |
+| -------- | --------------------------------------------------------------------------------------------------- |
+| Custom | [foxglove.SceneEntity](https://docs.foxglove.dev/docs/visualization/message-schemas/scene-entity) |
+| Custom | [foxglove.SceneUpdate](https://docs.foxglove.dev/docs/visualization/message-schemas/scene-update) |
+
+11.转换
+
+
+| 框架   | 样式                                                                                                    |
+| -------- | --------------------------------------------------------------------------------------------------------- |
+| ROS1   | [tf/tfMessage](https://docs.ros.org/en/noetic/api/tf/html/msg/tfMessage.html)                           |
+| ROS1   | [tf2_msgs/TFMessage](https://docs.ros.org/en/noetic/api/tf2_msgs/html/msg/TFMessage.html)               |
+| ROS2   | [tf2_msgs/msg/TFMessage](https://github.com/ros2/geometry2/blob/ros2/tf2_msgs/msg/TFMessage.msg)        |
+| Custom | [foxglove.FrameTransform](https://docs.foxglove.dev/docs/visualization/message-schemas/frame-transform) |
+
+12.雷达
+
+
+| 框架 | 样式                                                                                                                   |
+| ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| ROS1 | [velodyne_msgs/VelodyneScan](https://docs.ros.org/en/noetic/api/velodyne_msgs/html/msg/VelodyneScan.html)              |
+| ROS2 | [velodyne_msgs/msg/VelodyneScan](https://github.com/ros-drivers/velodyne/blob/ros2/velodyne_msgs/msg/VelodyneScan.msg) |
+
+13.视频
+
+
+| 框架 | 样式                                                                                                      |
+| ------ | ----------------------------------------------------------------------------------------------------------- |
+| ROS1 | [foxglove.CompressedVideo](https://docs.foxglove.dev/docs/visualization/message-schemas/compressed-video) |
+
+##### 设置项
+
+3D面板的设置选项比较多，如下图：
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/9113c805-147a-49de-9d24-cc8dd847713a.png)
+
+1.参考系：
+
+选择3D场景的显示参考系和追随模式
+
+
+| 属性       | 描述                                                                                                                       |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| 展示参考系 | 配置渲染场景的参考系为了渲染一个场景元素，需要把场景帧到显示帧做一个转换，如果显示帧场景帧就是显示帧，不需要做额外的变换。 |
+| 追随模式   | 配置视口的跟随行为姿态--跟随显示帧的位置和方向位置--仅跟随显示帧的位置固定--不更新视口                                     |
+
+2.场景：
+
+配置一般的渲染属性和视口属性
+
+
+| 属性                   | 描述                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------ |
+| 场景统计               | 在面板角落显示渲染性能统计数据                                               |
+| 背景                   | 场景背景颜色                                                                 |
+| 标签缩放               | 渲染标签的比例                                                               |
+| 忽略 COLLADA <up_axis> | 忽略COLLADA文件中的<up_axis>标签                                             |
+| 网格上轴               | 加载没有方向信息的网格（STL、OBJ）时的“向上”方向（“Y-向上”、“Z-向上”） |
+
+3.视图：
+
+配置相机设置
+
+
+| 属性     | 描述                                                      |
+| ---------- | ----------------------------------------------------------- |
+| 同步相机 | 是否同步多个3D面板的相机状态                              |
+| 距离     | 相机距视口中心的距离                                      |
+| 透视     | 2D(关)和3D(开)视图之间进行切换，2D视图将相机定位为Z轴朝下 |
+| 目标X    | 视口中心的X坐标                                           |
+| Y        | 视口中心的Y坐标                                           |
+| Z        | 视口中心的Z坐标                                           |
+| 极角     | 相机的极角                                                |
+| 方向角   | 相机的方向角                                              |
+| Y轴视野  | 相机在Y轴上的视角                                         |
+| 近面     | 相机近平面的距离                                          |
+| 远面     | 相机远平面的距离                                          |
+
+4.变换：
+
+机器人系统会产生许多描述其对周围世界的观察的消息。这些消息可能存在于一个或多个坐标系中，或者存在于机器人的不同部分上。
+
+变换定义给定时间两个坐标系之间的空间关系。要将对象渲染到场景中，必须存在从对象的坐标系到显示帧的变换路径。
+
+5.话题：
+
+列出包含在场景中显示的受支持消息类型的主题。
+
+每个主题都有单独的设置来配置可视化在场景中的显示方式。
+
+6.自定义图层：
+
+自定义图层允许添加不来自数据源的视图元素。
+
+* 添加网格
+* 添加URDF
+
+  如果数据源支持参数(本机ROS1或者ROS2连接)，且/robot_description设置为有效的URDF XML。
+
+添加自定义图层的URDF模型设置如下:
+
+
+| 属性     | 描述                                                                                                                                 |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| 源       | URDF文件的来源                                                                                                                       |
+| URL      | 以下方案之一中的URDF源文件：http(s):// --通过HTTP(S)连接package:// --加载包路径(仅桌面版支持)file:// --加载文件路径(仅桌面版支持)    |
+| 文件路径 | URDF文件路径                                                                                                                         |
+| 参数     | URDF文件中包含的参数                                                                                                                 |
+| 话题     | URDF文件包含的话题                                                                                                                   |
+| 标签     | (可选)自定义图层将在侧边栏中显示的标签                                                                                               |
+| 帧前缀   | (可选)TF前缀                                                                                                                         |
+| 显示模式 | 要显示的机器人链接几何形状Auto --默认为视觉几何图形，如果没有效果，切换到碰撞几何图形Visual -- 视觉几何图形Collision -- 碰撞几何图形 |
+| 颜色     | 如果数据源没有颜色，则可以为URDF模型选择颜色                                                                                         |
+
+7.发布：
+
+配置3D面板的点击发布行为
+
+
+| 属性 | 描述                           |
+| ------ | -------------------------------- |
+| 类型 | 发布的消息类型：点姿态姿态估计 |
+| 话题 | 发布消息的话题                 |
+
+#### 主题图
+
+展示当前节点和主题拓扑图形的可视化效果
+
+要使用这个面板，必须通过本机或者Rosbridge连接到实时的ROS系统，使用本机连接效果最好。它可以显示节点、主题和服务。
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/9188b554-0a68-4586-a6a4-78ec911b4ccc.png)
+
+* 蓝框里是节点
+* 紫色是话题
+* 红框里是服务
+
+#### 仪表
+
+基于连续值显示彩色仪表
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/de7ab20d-75f3-46a4-b4a3-e2c1c1ccc22d.png)
+
+#### 原始消息
+
+检查数据源中的特定路径的消息
+
+#### 参数
+
+读取和设置连接的数据源的参数
+
+支持的数据源连接如下:
+
+
+|                    |                                                 |
+| -------------------- | ------------------------------------------------- |
+| Foxglove Websocket | 推荐ROS1、ROS2(用foxglove_bridge)和自定义数据源 |
+| ROS1               | 本地连接                                        |
+| Rosbridge          | 查看ROS1和ROS2的ROS参数                         |
+
+#### 发布
+
+将某个话题的消息发布回机器人栈
+
+#### 变量滑块
+
+用于快速更新数值变量值
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/7efbd1f4-2675-449b-9a0b-75a153b3f4dc.png)
+#### 图像
+
+显示带有文本标签、圆圈和点等2D注释的原始图像、压缩图像以及压缩视频。
+
+支持的数据源的编码格式：
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/4720cb55-2cbe-4a16-8847-b104b8a3251d.png)
+
+支持的消息：
+
+必须使用3D标记消息或者以下样式类型之一
+
+* 原始图像
+
+
+| 框架   | 样式                                                                                                     |
+| -------- | ---------------------------------------------------------------------------------------------------------- |
+| ROS1   | [sensor_msgs/Image](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html)                  |
+| ROS2   | [sensor_msgs/msg/Image](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/Image.msg) |
+| Custom | [foxglove.RawImage](https://docs.foxglove.dev/docs/visualization/message-schemas/raw-image)              |
+
+* 压缩图像
+
+
+| 框架   | 样式                                                                                                                         |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ROS1   | [sensor_msgs/CompressedImage](https://docs.ros.org/en/api/sensor_msgs/html/msg/CompressedImage.html)                         |
+| ROS2   | [sensor_msgs/msg/CompressedImage](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/CompressedImage.msg) |
+| Custom | [foxglove.CompressedImage](https://docs.foxglove.dev/docs/visualization/message-schemas/compressed-image)                    |
+
+* 压缩视频
+
+
+| 框架   | 样式                                                                                                      |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| Custom | [foxglove.CompressedVideo](https://docs.foxglove.dev/docs/visualization/message-schemas/compressed-video) |
+
+* 标定参数
+
+
+| 框架   | 样式                                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| ROS1   | [sensor_msgs/CameraInfo](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/CameraInfo.html)                  |
+| ROS2   | [sensor_msgs/msg/CameraInfo](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/CameraInfo.msg) |
+| Custom | [foxglove.CameraCalibration](https://docs.foxglove.dev/docs/visualization/message-schemas/camera-calibration)      |
+
+* 单个图像标注
+
+
+| 框架 | 样式                                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| ROS1 | [visualization_msgs/ImageMarker](http://docs.ros.org/en/noetic/api/visualization_msgs/html/msg/ImageMarker.html)                   |
+| ROS2 | [visualization_msgs/msg/ImageMarker](https://github.com/ros2/common_interfaces/blob/master/visualization_msgs/msg/ImageMarker.msg) |
+
+* 多个图像标注
+
+
+| 框架   | 样式                                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| ROS1   | [foxglove_msgs/ImageMarkerArray](https://github.com/foxglove/ros_foxglove_msgs/blob/main/msg/ImageMarkerArray.msg) |
+| Custom | [foxglove.ImageAnnotations](https://docs.foxglove.dev/docs/visualization/message-schemas/image-annotations)        |
+
+![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/503972b2-bbd1-4274-958f-ff8836d82f2d.png)
+
+#### 图表
+
+绘制主题消息路径中的任意数值。
+
+当播放本地或者远程数据文件时，该面板会在整个播放时间轴上预加载属于指定主题消息路径的数据。
+#### 地图
+
+把[LocationFix](https://docs.foxglove.dev/docs/visualization/panels/map#locationfix) 主题消息展示为世界地图上的点。
+
+支持的消息类型
+
+* LocationFix
+
+
+| 框架   | 样式                                                                                                             |
+| -------- | ------------------------------------------------------------------------------------------------------------------ |
+| ROS1   | [sensor_msgs/NavSatFix](https://docs.ros.org/en/api/sensor_msgs/html/msg/NavSatFix.html)                         |
+| ROS2   | [sensor_msgs/msg/NavSatFix](https://github.com/ros2/common_interfaces/blob/master/sensor_msgs/msg/NavSatFix.msg) |
+| Custom | [foxglove.LocationFix](https://docs.foxglove.dev/docs/visualization/message-schemas/location-fix)                |
+
+* GeoJSON
+
+
+| 框架   | 样式                                                                             |
+| -------- | ---------------------------------------------------------------------------------- |
+| Custom | [foxglove.Log](https://docs.foxglove.dev/docs/visualization/message-schemas/log) |
+
+#### 指示器
+
+基于阈值值显示彩色或者文本指示器
+
+#### 数据源信息
+
+查看已连接数据源的时间和主题信息
+
+#### 日志
+
+显示和过滤主题中的日志消息
+
+支持的消息类型：
+
+
+| 框架   | 样式                                                                                                    |
+| -------- | --------------------------------------------------------------------------------------------------------- |
+| ROS1   | [rosgraph_msgs/Log](https://docs.ros.org/en/noetic/api/rosgraph_msgs/html/msg/Log.html)                 |
+| ROS2   | [rcl_interfaces/msg/Log](https://github.com/ros2/rcl_interfaces/blob/master/rcl_interfaces/msg/Log.msg) |
+| Custom | [foxglove.Log](https://docs.foxglove.dev/docs/visualization/message-schemas/log)                        |
+
+#### 状态转换
+
+跟踪值随时间变化的情况
+
+当播放预先录制的数据源时，将会为整个播放时间线预加载属于指定主题消息路径的数据。
+
+#### 用户脚本
+
+使用自定义脚本在Foxglove内部发布伪主题。操作、减少和过滤现有消息并将其输出以进行有用的可视化。
+
+用户脚本可以转换播放数据和预加载数据。
+
+* 播放数据---消息逐帧流式传输到Foxglove中，如:原始消息或3D面板数据
+  *  预加载数据---正在播放的整个数据范围的消息，如绘制或者状态转换面板的数据
+  在抓换预加载数据时，Foxglove创建两个正在运行的用户脚本示例，一个处理完整的数据范围，另一个仅处理当前播放的消息帧，用户脚本的每个实例都按照接收时间顺序接收消息。
+  #### 表格
+
+  以表格格式展示主题数据
+  #### 诊断-概要
+
+  显示所有ROS [DiagnosticArray](https://docs.foxglove.dev/docs/visualization/panels/diagnostics#diagnosticarray)主题消息的摘要
+  #### 诊断-详细信息
+
+  显示特定硬件ID的 ROS [DiagnosticArray](https://docs.foxglove.dev/docs/visualization/panels/diagnostics#diagnosticarray)消息
+  #### 调用服务
+
+  调用服务并查看其响应，支持实时ROS1和ROS2连接，以及提供服务的自定义Foxglove Websocket连接。
+  #### 远程操纵
+
+  通过实时连接远程操控机器人。将给定主题上的[geometry_msgs/Twist](https://docs.ros.org/en/api/geometry_msgs/html/msg/Twist.html)或[geometry_msgs/msg/Twist](https://github.com/ros2/common_interfaces/blob/master/geometry_msgs/msg/Twist.msg)消息发布回实时ROS堆栈来远程操作机器人。
+  必须通过本机或者Rosbridge来连接到机器人。
+  支持的消息：
+  | 框架 | 样式                                                                                                         |
+  | ------ | -------------------------------------------------------------------------------------------------------------- |
+  | ROS1 | [geometry_msgs/Twist](https://docs.ros.org/en/noetic/api/std_msgs/html/msg/ColorRGBA.html)                   |
+  | ROS2 | [geometry_msgs/msg/Twist](https://github.com/ros2/common_interfaces/blob/master/geometry_msgs/msg/Twist.msg) |
+
+  #### 选项卡
+
+  将面板分组在选项卡界面中
+  ### 效果展示
+
+  #### 通过Foxglove WebSocket连接
+
+  通过Orbbec SDK打开DCW2，通过Foxglove Websocket连接，能显示RGB、深度、IR和点云。
+
+   1.通过Orbbec SDK打开DCW2
+
+   2.打开foxglove_bridge
+
+   3.打开foxglove-studio，打开连接时选择Foxglove websocket
+  打开三个终端，按照上述3步运行如下：
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/8e6a3afc-9d40-4eb9-8aa5-f442b6497fd4.png)
+
+  最终显示的点云、RGB、深度和IR效果如下图:
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/501f12d5-c7a2-45ee-93a4-16d721f73917.png)
+
+  #### 通过Rosbridge连接
+
+  同样接DCW2，不同点是：打开的rosbridge_server,且foxgolve连接的时选择Rosbridge，也能看到效果图。
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/cbe114d2-4dbc-4a61-8bfc-9684bebd2eae.png)
+
+  ## 自定义扩展开发
+
+  当foxglove提供的功能不完全满足我们的需求时，我们可以自定义扩展开发来满足我们的需求。
+
+  用JavaScript或者TypeScript写扩展，然后打包成.foxe文件，就可以把这些文件分发到Foxglove组织或者通过marketplace公开(仅桌面app支持通过marketplace安装扩展)，一个单一的扩展可以包括多个面板和转换器。
+
+  foxgolve提供一系列模板和命令在create-foxglove-extension包内来简化扩展开发。
+
+  ### 更新Nodejs版本，搭建开发环境
+
+  扩展开发需要：Node.js 14+
+
+  ubuntu20.04默认安装nodejs的版本是V10.19.0，该版本太低，无法正常创建一个扩展
+
+  通过node -v查看nodejs的版本，如果不满足需求，需更新到V14以上。
+
+  通过NPM(节点包管理器)来更新Node.js比较方便，步骤：
+
+  1.清除npm缓存
+
+  ```
+  npm cache clean -f 
+  ```
+  2.安装n，Node的版本管理器
+
+  ```
+  sudo npm install -g n
+  ```
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/90b7418e-3a76-4cbb-aab8-d7bf6e720381.png)
+
+  3.安装n模块后，可以用它来安装最新的稳定版本
+
+  ```
+  sudo n stable
+  ```
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/aeadc513-0c12-43cc-8941-b75b79c6b99e.png)
+
+  4.此时虽然安装完，但是node -v查看版本时，版本还没变，需重新打开一个终端，然后输入node -v查询，会发现已经成功更新了Nodejs的版本。
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/755d0dd2-30c0-45df-bfcc-e99357c7c80c.png)
+
+  ### 自定义扩展的创建
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/2216e921-4925-41b9-a24b-915c4211e6ac.png)
+
+  结束后，进入到my-extension目录下，结构如图，进入到src目录下，里边的index.ts文件是扩展的入口点
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/d64ab55f-0966-4ac5-b0a3-cdabf958f3ad.png)
+
+  入口点脚本必须导入一个接收单一参数ExtensionContext的activate函数
+
+  index.ts自动帮我填充了一个名为"example-panel"的面板。
+
+  ```
+  import { ExtensionContext } from "@foxglove/studio";
+  import { initExamplePanel } from "./ExamplePanel";
+
+  export function activate(extensionContext: ExtensionContext): void {
+    extensionContext.registerPanel({ name: "example-panel", initPanel: initExamplePanel });
+  }
+  ```
+  我们不做任何修改，其实已经创建了一个简单的插件了。
+
+  ### 自定义扩展的发布和使用
+
+  在扩展目录下，运行如下命令：
+
+  ```
+  npm run local-install
+  ```
+  结果如图：
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/9f523e3d-83ac-4632-8806-420f1bd6a924.png)
+
+  此时将会在foxglove-studio的扩展目录下会生成我们编译好扩展
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/329f3a2f-f310-41f9-bb9a-6dabab82316c.png)
+
+  打开终端运行foxglove-studio
+
+  点击添加面板，此时就可以看到我们刚刚创建的面板已经出现了。
+
+  ![](https://static.dingtalk.com/media/lADPD4PvYHk9WrvNCrDNDkA_3648_2736.jpg)
+
+  选择它，界面如下图：
+
+  ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/2599f176-164d-46c8-b6a4-9a492ca15ec6.png)
