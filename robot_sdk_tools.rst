@@ -1,11 +1,12 @@
 .. 这一页是模块目录树
 
-算法模块
+Tools工具集合
 ======================================================
 
 .. toctree::
     :maxdepth: 1
-    :caption: Body_tracking_alg 人体识别算法:
+    :caption: Tools工具集合
     :titlesonly:
 
-    source/syncdoc/robot_sdk/alg/body_tracking_alg/README.md
+    source/common_tools_foxglove.md
+    source/common_tools_flame_graph.md

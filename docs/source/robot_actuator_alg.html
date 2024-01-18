@@ -49,7 +49,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. 概述</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html#id2">2. 功能介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html#robotkit"><strong>3. RobotKit核心模块</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#robotkit">3. RobotKit核心模块</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html#id3">4. RobotKit框图</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">二.RobotRef参考设计实例</span></p>
@@ -59,11 +59,11 @@
 <p class="caption" role="heading"><span class="caption-text">三.RobotSDK功能介绍</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="robot_sdk.html">1. Robot SDK概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_app.html">2. APP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_alg.html">3. ALG算法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_sensor.html">4. Sensor 传感器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_app.html">2. App应用示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_alg.html">3. 算法模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_sensor.html">4. Sensor传感器模块</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_sdk_turbo_ai.html">5. Turbo AI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_common.html">6. Common 通用组件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_sdk_tools.html">6. Tools工具集合</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">四.RobotActuator功能介绍</span></p>
 <ul class="current">
@@ -115,14 +115,13 @@
   <section id="robotactuator">
 <h1><span class="section-number">2. </span>RobotActuator<a class="headerlink" href="#robotactuator" title="Link to this heading"></a></h1>
 <p><strong>robot_actuator软件目录：</strong></p>
-<p>app // 运动机构类型、业务组合</p>
-<p>framework //能力层</p>
-<p>alg //PID、MPC运动控制算法、同步融合</p>
-<p>alg/motion //通信接口、运动控制协议接口</p>
-<p>device/ //外设</p>
-<p>device/motor //fOC等电机控制算法</p>
-<p>common //通用基础组件集合</p>
-<p>.</p>
+<ul class="simple">
+<li><p>app :运动机构类型、业务组合</p></li>
+<li><p>framework : 抽象基础框架曾，适合多种运控形态</p></li>
+<li><p>alg : PID、MPC运动控制算法、同步融合，通信接口、运动控制协议接口</p></li>
+<li><p>device: 小脑运控主板的外设配置和电机配置</p></li>
+<li><p>common ： 通用基础组件集合</p></li>
+</ul>
 <hr class="docutils" />
 <p><strong>运动控制接口&amp;协议：</strong></p>
 <p>…</p>

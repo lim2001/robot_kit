@@ -1,5 +1,7 @@
 # MS500 SDK基本介绍
 
+## 概述
+
 MS500 SDK是专门为Oradar MS500激光雷达产品设计的软件开发套件。提供易于使用的C/C++风格的API。通过MS500 SDK，用户可以快速连接Oradar MS500激光雷达并接收激光雷达点云数据。
 
 ## 运行环境
@@ -36,10 +38,9 @@ cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 mingw32-make -j8
 ```
 
-生成`ord_sdk.a`库文件和`scan_frame_test`可执行文件
+生成 `ord_sdk.a`库文件和 `scan_frame_test`可执行文件
 
 ## SDK 主要函数API说明
-
 
 | 函数名称               | 功能介绍                                                                                          |
 | ---------------------- | ------------------------------------------------------------------------------------------------- |
@@ -79,7 +80,7 @@ scan_frame_test是一个简单从MS500激光雷达获取一圈数据的示例程
 
 Linux下：
 
-将MS500激光雷达设备通过网线，连接到Ubuntu系统，在Ubuntu系统下打开终端，把对应网卡IP设置为`192.168.1.10`。然后执行SDK Sample,输入如下命令：
+将MS500激光雷达设备通过网线，连接到Ubuntu系统，在Ubuntu系统下打开终端，把对应网卡IP设置为 `192.168.1.10`。然后执行SDK Sample,输入如下命令：
 
 ```
 cd sdk/build
@@ -88,4 +89,4 @@ cd sdk/build
 
 Windows下:
 
-将MS500激光雷达设备通过网线，连接到Windows系统，在网络设置中把对应网卡IP设置为`192.168.1.10`。直接双击`scan_frame_test.exe`可执行文件即可。
+将MS500激光雷达设备通过网线，连接到Windows系统，在网络设置中把对应网卡IP设置为 `192.168.1.10`。直接双击 `scan_frame_test.exe`可执行文件即可。

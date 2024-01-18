@@ -1,38 +1,40 @@
 # Robot SDK概述
 
-RobotSDK ---- 大脑应用板/主板，为robot_kit/rotot_sdk部分:
-
-大脑基于视觉导航算法，融合奥比深度点云数据，提供机器人应用业务框架，支撑开发者二次开发强大的ai智能能力集，赋予机器人各种场景服务能力
+RobotSDK作为机器人的“大脑”模块，为机器人提供感知、决策、规划和TurboAI的模型部署和加速能力；SDK内部包含Apps应用示例，传感器模块，算法模块，TurboAI，Tools工具集合和基础组件的模块；各个模块设计采用独立设计，采用接口依赖原则，方便逐步扩展更多传感器，算法功能模块；
 
 <br>
 
-**RobotSDK提供app sample支持机器人类型为：**
+## 功能介绍
 
-* Quadruped robot 四足仿生机器人
-* Food Delivered services robot  送餐服务机器人
-* Industrial robotic arm services robot  工业协作定制服务机器人
+![frame](image/robot_sdk_frame.png)
 
-<br>
-<br>
 
-**RobotSDK 依据运动机构分类，支持运动机构类型为：**
+**核心功能**
 
-* 两轮/差分/阿克曼
-* 四足
-* 机械臂
+* 内置机器人常用各种应用Demo
+* 内置机器人SLAM/避障/规划等算法
+* 内置常用各种传感器驱动和多传感器融合方案
+* 提供TurboAI的深度模型加速能力
+* 提供机器人建图，定位和感知的应用案例
+* 提供丰富文档，视频资料和论坛
+* 提供foxglove/FlameGraph等调试工具
 
-运动机构由大脑经由外部通信，传输控制指令给小脑，小脑专注提供实时复杂运动控制能力给到机器人支撑
+**亮点：**
 
-<br>
+“效率”：提供最少层级、高性能获取设备数据的能力
 
-依据RobotSDK提供的组件各种能力的融合，开发者可以为产品定制化各种类型功能
-app/xxx/onfig 提供灵活的配置选择，开发者也可在此配置选项的基础上进行深度定制集成
+“灵活”：模块化传感器功能，灵活组合不同设备
 
-<br>
-<br>
-<br>
-<br>
+“高可扩展”：支持日益多样化形态的设备及系统，以及插件化算法适用于不同场景
 
-**Robot SDK 软件目录**
+## Robot SDK 软件目录
 
-![](image/robot_sdk_dir.png)
+![sdk_path.png](image/sdk_path.png)
+
+* alg目录：存在机器人使用过程中常用一些算法，例如：VIO定位，SLAM，分割算法，障碍物检测算法，人物跟踪算法等；
+* app目录：放置使用Camera，Lidar传感器和一些算法组成一些具备独立运行的功能示例；
+* common目录： 放置一些基础的基础组件；
+* device： 放置机器人主板及本体的一些外设器件，例如mic，LED等
+* doc：放置SDK的一些使用，安装文档
+* framework：放置一些软件框架的配置，例如Nav2，Movelt2等；
+* sensor：放置机器人常用的传感器例如Camera，Lidar，RTK等；

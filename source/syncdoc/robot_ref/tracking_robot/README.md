@@ -41,7 +41,7 @@
 
 2、source install/setup.bash  (若设备执行器是zsh，则使用source install/setup.zsh)
 
-3、ros2 launch tracking bringup_launch.py
+3、ros2 launch bringup bringup_launch.py
 
 <br>
 

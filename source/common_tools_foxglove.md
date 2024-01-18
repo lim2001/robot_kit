@@ -548,7 +548,7 @@ ros2 launch rosbridge_server rosbridge_websocket.launch
 
   ![](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/4j6OJQWe7LXjq3p8/img/cbe114d2-4dbc-4a61-8bfc-9684bebd2eae.png)
 
-  ## 自定义扩展开发
+  ### 自定义扩展开发
 
   当foxglove提供的功能不完全满足我们的需求时，我们可以自定义扩展开发来满足我们的需求。
 

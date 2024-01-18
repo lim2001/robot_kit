@@ -31,7 +31,7 @@ Robot Kit 机器人开发工具箱文档
     robot_sdk_alg.rst
     robot_sdk_sensor.rst
     robot_sdk_turbo_ai.rst
-    robot_sdk_common.rst
+    robot_sdk_tools.rst
 
 .. toctree::
     :maxdepth: 2
